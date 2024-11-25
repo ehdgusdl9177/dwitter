@@ -56,7 +56,14 @@ router.post("/", (req, res, next) => {
   tweets = [...tweets, tweet];
   res.status(201).json(tweets);
 });
+
 // PUT /tweets/:id
+
 // DELETE /tweets/:id
+router.delete("/:id", (req, res, next) => {
+  const id = req.params.id;
+  tweets = tweets.filter((t) => t.id !== id);
+  res.sendStatus(204);
+});
 
 export default router;
