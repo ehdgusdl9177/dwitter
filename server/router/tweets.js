@@ -1,7 +1,7 @@
 import express from "express";
 import "express-async-errors";
 
-const tweets = [
+let tweets = [
   {
     id: "1",
     text: "테스트 1",
@@ -42,7 +42,20 @@ router.get("/:id", (req, res, next) => {
     res.status(404).json({ message: `Tweet id(${id}) not found` });
   }
 });
+
 // POST /tweets;
+router.post("/", (req, res, next) => {
+  const { text, name, username } = req.body;
+  const tweet = {
+    id: String(tweets.length + 1),
+    text,
+    createdAt: new Date(),
+    name,
+    username,
+  };
+  tweets = [...tweets, tweet];
+  res.status(201).json(tweets);
+});
 // PUT /tweets/:id
 // DELETE /tweets/:id
 
