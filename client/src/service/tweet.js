@@ -39,11 +39,15 @@ export default class TweetService {
   }
 
   async updateTweet(tweetId, text) {
-    const tweet = this.tweets.find((tweet) => tweet.id === tweetId);
-    if (!tweet) {
-      throw new Error("tweet not found!");
+    const response = await fetch(`${this.baseURL}/tweets${tweetId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      throw new Error(data.message);
     }
-    tweet.text = text;
-    return tweet;
+    return data;
   }
 }
