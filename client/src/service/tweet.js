@@ -16,15 +16,16 @@ export default class TweetService {
   }
 
   async postTweet(text) {
-    const tweet = {
-      id: Date.now(),
-      createdAt: new Date(),
-      name: "Ellie",
-      username: "ellie",
-      text,
-    };
-    this.tweets.push(tweet);
-    return tweet;
+    const response = await fetch(`${this.baseURL}/tweets`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, username: "john", name: "John" }),
+    });
+    const data = await response.json();
+    if (response.status !== 201) {
+      throw new Error(data.message);
+    }
+    return data;
   }
 
   async deleteTweet(tweetId) {
