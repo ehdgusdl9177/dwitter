@@ -29,7 +29,13 @@ export default class TweetService {
   }
 
   async deleteTweet(tweetId) {
-    this.tweets = this.tweets.filter((tweet) => tweet.id !== tweetId);
+    const response = await fetch(`${this.baseURL}/tweets${tweetId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.status !== 204) {
+      throw new Error(data.message);
+    }
   }
 
   async updateTweet(tweetId, text) {
