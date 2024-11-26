@@ -4,18 +4,18 @@ import "express-async-errors";
 let tweets = [
   {
     id: "1",
-    text: "드림코더분들 화이팅!",
+    text: "테스트 1",
     createdAt: Date.now().toString(),
-    name: "Bob",
-    username: "bob",
+    name: "Kevin",
+    username: "kevin",
     url: "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png",
   },
   {
     id: "2",
-    text: "안뇽!",
+    text: "테스트 2",
     createdAt: Date.now().toString(),
-    name: "Ellie",
-    username: "ellie",
+    name: "Martin",
+    username: "martin",
   },
 ];
 const router = express.Router();
@@ -45,7 +45,7 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const { text, name, username } = req.body;
   const tweet = {
-    id: Date.now().toString(),
+    id: String(tweets.length + 1),
     text,
     createdAt: new Date(),
     name,

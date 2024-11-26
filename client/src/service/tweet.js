@@ -22,8 +22,8 @@ export default class TweetService {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         text,
-        username: "ellie",
-        name: "Ellie",
+        username: "kevin",
+        name: "Kevin",
       }),
     });
     const data = await response.json();
