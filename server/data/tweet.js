@@ -48,6 +48,6 @@ export function update(id, text) {
   return tweet;
 }
 
-export function deleteTweet(id) {
+export function remove(id) {
   tweets = tweets.filter((tweet) => tweet.id !== id);
 }
