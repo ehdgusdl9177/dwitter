@@ -1,23 +1,7 @@
 import express from "express";
 import "express-async-errors";
+import * as tweetRepository from "../data/tweet.js";
 
-let tweets = [
-  {
-    id: "1",
-    text: "테스트 1",
-    createdAt: Date.now().toString(),
-    name: "Kevin",
-    username: "kevin",
-    url: "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png",
-  },
-  {
-    id: "2",
-    text: "테스트 2",
-    createdAt: Date.now().toString(),
-    name: "Martin",
-    username: "martin",
-  },
-];
 const router = express.Router();
 
 // GET /tweets
@@ -25,8 +9,8 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   const username = req.query.username;
   const data = username
-    ? tweets.filter((tweet) => tweet.username === username)
-    : tweets;
+    ? tweetRepository.getAllTweetsByUsername()
+    : tweetRepository.getAllTweets();
   res.status(200).json(data);
 });
 
