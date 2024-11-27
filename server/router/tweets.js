@@ -9,15 +9,15 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   const username = req.query.username;
   const data = username
-    ? tweetRepository.getAllTweetsByUsername(username)
-    : tweetRepository.getAllTweets();
+    ? tweetRepository.getAllByUsername(username)
+    : tweetRepository.getAll();
   res.status(200).json(data);
 });
 
 // GET /tweets/:id
 router.get("/:id", (req, res, next) => {
   const id = req.params.id;
-  const tweet = tweetRepository.getTweetById();
+  const tweet = tweetRepository.getById();
   if (tweet) {
     res.status(200).json(tweet);
   } else {
@@ -28,7 +28,7 @@ router.get("/:id", (req, res, next) => {
 // POST /tweeets
 router.post("/", (req, res, next) => {
   const { text, name, username } = req.body;
-  const tweet = tweetRepository.createTweet(text, name, username);
+  const tweet = tweetRepository.create(text, name, username);
   res.status(201).json(tweet);
 });
 
@@ -36,7 +36,7 @@ router.post("/", (req, res, next) => {
 router.put("/:id", (req, res, next) => {
   const id = req.params.id;
   const text = req.body.text;
-  const tweet = tweetRepository.updateTweet(id, text);
+  const tweet = tweetRepository.update(id, text);
   if (tweet) {
     res.status(200).json(tweet);
   } else {

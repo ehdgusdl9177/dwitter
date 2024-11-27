@@ -16,19 +16,19 @@ let tweets = [
   },
 ];
 
-export function getAllTweets() {
+export function getAll() {
   return tweets;
 }
 
-export function getAllTweetsByUsername(username) {
+export function getAllByUsername(username) {
   return tweets.filter((t) => t.username === username);
 }
 
-export function getTweetById(id) {
+export function getById(id) {
   return tweets.find((t) => t.id === id);
 }
 
-export function createTweet(text, name, username) {
+export function create(text, name, username) {
   const tweet = {
     id: String(tweets.length + 1),
     text,
@@ -40,7 +40,7 @@ export function createTweet(text, name, username) {
   return tweet;
 }
 
-export function updateTweet(id, text) {
+export function update(id, text) {
   const tweet = tweets.find((tweet) => tweet.id === id);
   if (tweet) {
     tweet.text = text;
