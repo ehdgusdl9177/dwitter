@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   const username = req.query.username;
   const data = username
-    ? tweetRepository.getAllTweetsByUsername()
+    ? tweetRepository.getAllTweetsByUsername(username)
     : tweetRepository.getAllTweets();
   res.status(200).json(data);
 });
@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
 // GET /tweets/:id
 router.get("/:id", (req, res, next) => {
   const id = req.params.id;
-  const tweet = tweets.find((tweet) => tweet.id === id);
+  const tweet = tweetRepository.getTweetById();
   if (tweet) {
     res.status(200).json(tweet);
   } else {

@@ -23,3 +23,7 @@ export function getAllTweets() {
 export function getAllTweetsByUsername(username) {
   return tweets.filter((t) => t.username === username);
 }
+
+export function getTweetById(id) {
+  return tweets.find((t) => t.id === id);
+}
