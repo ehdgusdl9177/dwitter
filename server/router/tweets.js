@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
 // GET /tweets/:id
 router.get("/:id", (req, res, next) => {
   const id = req.params.id;
-  const tweet = tweetRepository.getById();
+  const tweet = tweetRepository.getById(id);
   if (tweet) {
     res.status(200).json(tweet);
   } else {
