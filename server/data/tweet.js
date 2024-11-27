@@ -47,3 +47,7 @@ export function updateTweet(id, text) {
   }
   return tweet;
 }
+
+export function deleteTweet(id) {
+  tweets = tweets.filter((tweet) => tweet.id !== id);
+}

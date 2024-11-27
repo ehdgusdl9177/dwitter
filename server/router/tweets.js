@@ -47,7 +47,7 @@ router.put("/:id", (req, res, next) => {
 // DELETE /tweets/:id
 router.delete("/:id", (req, res, next) => {
   const id = req.params.id;
-  tweets = tweets.filter((tweet) => tweet.id !== id);
+  tweetRepository.deleteTweet(id);
   res.sendStatus(204);
 });
 
