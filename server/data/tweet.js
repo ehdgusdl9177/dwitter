@@ -27,3 +27,15 @@ export function getAllTweetsByUsername(username) {
 export function getTweetById(id) {
   return tweets.find((t) => t.id === id);
 }
+
+export function createTweet(text, name, username) {
+  const tweet = {
+    id: String(tweets.length + 1),
+    text,
+    createdAt: new Date(),
+    name,
+    username,
+  };
+  tweets = [tweet, ...tweets];
+  return tweet;
+}

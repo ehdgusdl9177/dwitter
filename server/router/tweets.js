@@ -28,14 +28,7 @@ router.get("/:id", (req, res, next) => {
 // POST /tweeets
 router.post("/", (req, res, next) => {
   const { text, name, username } = req.body;
-  const tweet = {
-    id: String(tweets.length + 1),
-    text,
-    createdAt: new Date(),
-    name,
-    username,
-  };
-  tweets = [tweet, ...tweets];
+  const tweet = tweetRepository.createTweet(text, name, username);
   res.status(201).json(tweet);
 });
 
