@@ -36,9 +36,8 @@ router.post("/", (req, res, next) => {
 router.put("/:id", (req, res, next) => {
   const id = req.params.id;
   const text = req.body.text;
-  const tweet = tweets.find((tweet) => tweet.id === id);
+  const tweet = tweetRepository.updateTweet(id, text);
   if (tweet) {
-    tweet.text = text;
     res.status(200).json(tweet);
   } else {
     res.status(404).json({ message: `Tweet id(${id}) not found` });
