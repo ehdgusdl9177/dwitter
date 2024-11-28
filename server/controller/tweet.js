@@ -34,3 +34,9 @@ export function updateTweet(req, res) {
     res.status(404).json({ message: `Tweet id(${id}) not found` });
   }
 }
+
+export function deleteTweet(req, res) {
+  const id = req.params.id;
+  tweetRepository.remove(id);
+  res.sendStatus(204);
+}
