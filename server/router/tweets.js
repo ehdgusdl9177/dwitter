@@ -15,16 +15,7 @@ router.get("/:id", tweetController.getTweets);
 router.post("/", tweetController.createTweet);
 
 // PUT /tweets/:id
-router.put("/:id", (req, res, next) => {
-  const id = req.params.id;
-  const text = req.body.text;
-  const tweet = tweetRepository.update(id, text);
-  if (tweet) {
-    res.status(200).json(tweet);
-  } else {
-    res.status(404).json({ message: `Tweet id(${id}) not found` });
-  }
-});
+router.put("/:id", tweetController.updateTweet);
 
 // DELETE /tweets/:id
 router.delete("/:id", (req, res, next) => {
