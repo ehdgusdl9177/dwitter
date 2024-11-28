@@ -6,17 +6,13 @@ const router = express.Router();
 
 // GET /tweets
 // GET /tweets?username=:username
-router.get("/", tweetController.getTweets());
+router.get("/", tweetController.getTweets);
 
 // GET /tweets/:id
-router.get("/:id", tweetController.getTweets());
+router.get("/:id", tweetController.getTweets);
 
 // POST /tweeets
-router.post("/", (req, res, next) => {
-  const { text, name, username } = req.body;
-  const tweet = tweetRepository.create(text, name, username);
-  res.status(201).json(tweet);
-});
+router.post("/", tweetController.createTweet);
 
 // PUT /tweets/:id
 router.put("/:id", (req, res, next) => {

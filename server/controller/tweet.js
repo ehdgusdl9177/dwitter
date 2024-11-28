@@ -17,3 +17,9 @@ export function getTweet(req, res) {
     res.status(404).json({ message: `Tweet id(${id}) not found` });
   }
 }
+
+export function createTweet(req, res) {
+  const { text, name, username } = req.body;
+  const tweet = tweetRepository.create(text, name, username);
+  res.status(201).json(tweet);
+}
