@@ -9,15 +9,7 @@ const router = express.Router();
 router.get("/", tweetController.getTweets());
 
 // GET /tweets/:id
-router.get("/:id", (req, res, next) => {
-  const id = req.params.id;
-  const tweet = tweetRepository.getById(id);
-  if (tweet) {
-    res.status(200).json(tweet);
-  } else {
-    res.status(404).json({ message: `Tweet id(${id}) not found` });
-  }
-});
+router.get("/:id", tweetController.getTweets());
 
 // POST /tweeets
 router.post("/", (req, res, next) => {

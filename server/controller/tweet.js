@@ -7,3 +7,13 @@ export function getTweets(req, res) {
     : tweetRepository.getAll();
   res.status(200).json(data);
 }
+
+export function getTweet(req, res) {
+  const id = req.params.id;
+  const tweet = tweetRepository.getById(id);
+  if (tweet) {
+    res.status(200).json(tweet);
+  } else {
+    res.status(404).json({ message: `Tweet id(${id}) not found` });
+  }
+}
