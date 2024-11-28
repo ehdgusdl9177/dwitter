@@ -1,18 +1,12 @@
 import express from "express";
 import "express-async-errors";
-import * as tweetRepository from "../data/tweet.js";
+import * as tweetController from "../controller/tweet.js";
 
 const router = express.Router();
 
 // GET /tweets
 // GET /tweets?username=:username
-router.get("/", (req, res, next) => {
-  const username = req.query.username;
-  const data = username
-    ? tweetRepository.getAllByUsername(username)
-    : tweetRepository.getAll();
-  res.status(200).json(data);
-});
+router.get("/", tweetController.getTweets());
 
 // GET /tweets/:id
 router.get("/:id", (req, res, next) => {
