@@ -22,14 +22,9 @@ export default class TweetService {
   }
 
   async deleteTweet(tweetId) {
-    const response = this.http.fetch(`/tweets/${tweetId}`, {
+    return this.http.fetch(`/tweets/${tweetId}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
     });
-    if (response.status !== 204) {
-      const data = await response.json();
-      throw new Error(data.message);
-    }
   }
 
   async updateTweet(tweetId, text) {
