@@ -11,25 +11,18 @@ export default class TweetService {
   }
 
   async postTweet(text) {
-    const response = await fetch(`${this.baseURL}/tweets/`, {
+    return this.http.fetch(`/tweets/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         text,
         username: "kevin",
         name: "Kevin",
       }),
     });
-    const data = await response.json();
-    if (response.status !== 201) {
-      throw new Error(data.message);
-    }
-    console.log(data);
-    return data;
   }
 
   async deleteTweet(tweetId) {
-    const response = await fetch(`${this.baseURL}/tweets/${tweetId}`, {
+    const response = this.http.fetch(`/tweets/${tweetId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
@@ -40,7 +33,7 @@ export default class TweetService {
   }
 
   async updateTweet(tweetId, text) {
-    const response = await fetch(`${this.baseURL}/tweets/${tweetId}`, {
+    const response = this.http.fetch(`/tweets/${tweetId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text }),
