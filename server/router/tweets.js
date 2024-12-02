@@ -6,6 +6,14 @@ import { validate } from "../middleware/validator.js";
 
 const router = express.Router();
 
+const validateTweet = [
+  body("text")
+    .trim()
+    .isLength({ min: 3 })
+    .withmessage("text should be at least 3 characters"),
+  validate,
+];
+
 // GET /tweets
 // GET /tweets?username=:username
 router.get("/", tweetController.getTweets);
@@ -14,20 +22,10 @@ router.get("/", tweetController.getTweets);
 router.get("/:id", tweetController.getTweets);
 
 // POST /tweeets
-router.post(
-  "/",
-  [
-    body("text")
-      .trim()
-      .isLength({ min: 3 })
-      .withmessage("text should be at least 3 characters"),
-    validate,
-  ],
-  tweetController.createTweet
-);
+router.post("/", validateTweet, tweetController.createTweet);
 
 // PUT /tweets/:id
-router.put("/:id", tweetController.updateTweet);
+router.put("/:id", validateTweet, tweetController.updateTweet);
 
 // DELETE /tweets/:id
 router.delete("/:id", tweetController.deleteTweet);
