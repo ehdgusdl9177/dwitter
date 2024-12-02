@@ -10,7 +10,7 @@ const validateTweet = [
   body("text")
     .trim()
     .isLength({ min: 3 })
-    .withmessage("text should be at least 3 characters"),
+    .withMessage("text should be at least 3 characters"),
   validate,
 ];
 
