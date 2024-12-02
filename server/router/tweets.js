@@ -1,6 +1,8 @@
 import express from "express";
 import "express-async-errors";
+import { body } from "express-validator";
 import * as tweetController from "../controller/tweet.js";
+import { validate } from "../middleware/validator.js";
 
 const router = express.Router();
 
@@ -12,7 +14,17 @@ router.get("/", tweetController.getTweets);
 router.get("/:id", tweetController.getTweets);
 
 // POST /tweeets
-router.post("/", tweetController.createTweet);
+router.post(
+  "/",
+  [
+    body("text")
+      .trim()
+      .isLength({ min: 3 })
+      .withmessage("text should be at least 3 characters"),
+    validate,
+  ],
+  tweetController.createTweet
+);
 
 // PUT /tweets/:id
 router.put("/:id", tweetController.updateTweet);
