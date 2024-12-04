@@ -1,23 +1,29 @@
+import * as userRepository from "./auth.js";
+
 let tweets = [
   {
     id: "1",
     text: "테스트 1",
-    createdAt: Date.now().toString(),
-    name: "Kevin",
-    username: "kevin",
-    url: "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png",
+    createdAt: new Date().toString(),
+    userId: "1",
   },
   {
     id: "2",
     text: "테스트 2",
-    createdAt: Date.now().toString(),
-    name: "Martin",
-    username: "martin",
+    createdAt: new Date().toString(),
+    userId: "1",
   },
 ];
 
 export async function getAll() {
-  return tweets;
+  return Promise.all(
+    tweets.map(async (tweet) => {
+      const { username, name, url } = await userRepository.findById(
+        tweet.userId
+      );
+      return { ...tweet, username, name, url };
+    })
+  );
 }
 
 export async function getAllByUsername(username) {
