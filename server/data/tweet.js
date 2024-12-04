@@ -27,7 +27,9 @@ export async function getAll() {
 }
 
 export async function getAllByUsername(username) {
-  return tweets.filter((t) => t.username === username);
+  return getAll().then((tweets) => {
+    tweets.filter((tweet) => tweet.username === username);
+  });
 }
 
 export async function getById(id) {
