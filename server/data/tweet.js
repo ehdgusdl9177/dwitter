@@ -41,16 +41,15 @@ export async function getById(id) {
   return { ...found, username, name, url };
 }
 
-export async function create(text, name, username) {
+export async function create(text, userId) {
   const tweet = {
-    id: String(tweets.length + 1),
+    id: new Date().toString(),
     text,
     createdAt: new Date(),
-    name,
-    username,
+    userId,
   };
   tweets = [tweet, ...tweets];
-  return tweet;
+  return getById(tweet.id);
 }
 
 export async function update(id, text) {
