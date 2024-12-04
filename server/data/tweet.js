@@ -57,7 +57,7 @@ export async function update(id, text) {
   if (tweet) {
     tweet.text = text;
   }
-  return tweet;
+  return getById(tweet.id);
 }
 
 export async function remove(id) {
