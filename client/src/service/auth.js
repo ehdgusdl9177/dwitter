@@ -19,10 +19,12 @@ export default class AuthService {
     return data;
   }
   async login(username, password) {
-    return {
-      username: "kevin",
-      token: "abc1234",
-    };
+    const data = await this.http.fetch("/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
+    this.tokenStorage.saveToken(data.token);
+    return data;
   }
 
   async me() {
