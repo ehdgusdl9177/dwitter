@@ -27,12 +27,14 @@ export default class TweetService {
   async deleteTweet(tweetId) {
     return this.http.fetch(`/tweets/${tweetId}`, {
       method: "DELETE",
+      headers: this.getHeaders(),
     });
   }
 
   async updateTweet(tweetId, text) {
     return this.http.fetch(`/tweets/${tweetId}`, {
       method: "PUT",
+      headers: this.getHeaders(),
       body: JSON.stringify({ text }),
     });
   }
