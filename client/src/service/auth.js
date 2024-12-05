@@ -18,6 +18,7 @@ export default class AuthService {
     this.tokenStorage.saveToken(data.token);
     return data;
   }
+
   async login(username, password) {
     const data = await this.http.fetch("/auth/login", {
       method: "POST",
@@ -31,7 +32,7 @@ export default class AuthService {
     const token = this.tokenStorage.getToken();
     return this.http.fetch("/auth/me", {
       method: "GET",
-      headers: { authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 
