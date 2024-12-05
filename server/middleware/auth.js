@@ -10,15 +10,19 @@ export const isAuth = async (req, res, next) => {
   }
 
   const token = authHeader.split(" ")[1];
-  jwt.verify(token, "F2dN7x8HV", async (error, decoded) => {
-    if (error) {
-      return res.status(401).json(AUTH_ERROR);
+  jwt.verify(
+    token,
+    "F2dN7x8HVzBWaQuEEDnhsvHXRWqAR63z",
+    async (error, decoded) => {
+      if (error) {
+        return res.status(401).json(AUTH_ERROR);
+      }
+      const user = await userRepository.findById(decoded.id);
+      if (!user) {
+        return res.status(401).json(AUTH_ERROR);
+      }
+      req.userId = user.id; // req.customData
+      next();
     }
-    const user = await userRepository.findById(decoded.id);
-    if (!user) {
-      return res.status(401).json(AUTH_ERROR);
-    }
-    req.userId = user.id;
-    next();
-  });
+  );
 };

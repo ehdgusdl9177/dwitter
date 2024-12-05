@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import {} from "express-async-errors";
 import * as userRepository from "../data/auth.js";
 
-const jwtSecretKey = "F2dN7x8HV";
+const jwtSecretKey = "F2dN7x8HVzBWaQuEEDnhsvHXRWqAR63z";
 const jwtExpiresInDays = "2d";
 const bcryptSaltRounds = 12;
 
@@ -22,7 +22,6 @@ export async function signup(req, res) {
     url,
   });
   const token = createJwtToken(userId);
-  console.log(hashed);
   res.status(201).json({ token, username });
 }
 
