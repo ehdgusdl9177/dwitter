@@ -28,10 +28,11 @@ export default class AuthService {
   }
 
   async me() {
-    return {
-      username: "kevin",
-      token: "abc1234",
-    };
+    const token = this.tokenStorage.getToken();
+    return this.http.fetch("/auth/me", {
+      method: "GET",
+      headers: { authorization: `Bearer ${token}` },
+    });
   }
 
   async logout() {
